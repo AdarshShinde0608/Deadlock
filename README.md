@@ -28,6 +28,30 @@ Open the local URL printed by Streamlit (normally `http://localhost:8501`).
 python -m pytest -q
 ```
 
+## Deployment
+*Note on Vercel:* Streamlit apps rely on a persistent Python server (Tornado and WebSockets) to maintain live user sessions and UI state. Because Vercel uses stateless serverless functions with execution timeouts, Streamlit cannot run natively on Vercel. 
+
+Instead, DeadlockLab is fully configured for easy 1-click deployment on platforms that support persistent Python web apps:
+
+### 1. Render (Recommended)
+1. Push your repository to GitHub.
+2. Go to [Render Dashboard](https://dashboard.render.com/) and click **New > Web Service**.
+3. Connect your GitHub repository (`AdarshShinde0608/Deadlock`).
+4. Render will automatically detect `render.yaml` and configure:
+   - **Build Command:** `pip install -r requirements.txt`
+   - **Start Command:** `streamlit run app.py --server.port=$PORT --server.address=0.0.0.0 --server.headless=true`
+5. Click **Create Web Service**.
+
+### 2. Streamlit Community Cloud
+1. Go to [share.streamlit.io](https://share.streamlit.io/).
+2. Click **New app**.
+3. Select your repository: `AdarshShinde0608/Deadlock`, branch: `main`, main file path: `DeadlockLab/app.py` (or `app.py` if deployed from root).
+4. Click **Deploy!**
+
+### 3. Railway / Hugging Face Spaces
+- **Railway:** Connects directly via `Procfile`.
+- **Hugging Face Spaces:** Choose Streamlit SDK space.
+
 ## Project structure
 ```text
 DeadlockLab/
